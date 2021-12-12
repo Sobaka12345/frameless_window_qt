@@ -1,0 +1,30 @@
+*
+{
+    font-family: Arial;
+    font-size: 11pt;
+}
+
+QMainWindow
+{
+    border: 1px solid #3CACAE;
+}
+
+CaptionBar#captionBar
+{
+    font-weight: bold;
+    color: white;
+
+    min-height: 2em;
+    max-height: 2em;
+
+    background-color: #3CACAE;
+}
+
+CaptionBar QToolButton
+{
+    height: 2em;
+    width: 2em;
+
+    color: white;
+    background-color: #0C6980;
+}
