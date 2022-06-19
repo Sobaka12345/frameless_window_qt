@@ -29,7 +29,6 @@ private:
 private:
     Ui::CaptionBar *m_ui;
 
-	// QWidget interface
 protected:
 	virtual void mousePressEvent(QMouseEvent* event) override;
 	virtual void mouseReleaseEvent(QMouseEvent* event) override;

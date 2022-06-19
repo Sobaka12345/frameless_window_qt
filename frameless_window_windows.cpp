@@ -191,7 +191,7 @@ void FramelessWindowWindows::setWindowCornersRoundness(const CornersRoundness& r
 }
 
 bool FramelessWindowWindows::filterNativeEvent(const ICaptionBar* captionBar,
-    const QByteArray &eventType, void *message, long *result)
+    const QByteArray &eventType, void *message, qintptr *result)
 {
     Q_UNUSED(eventType);
 
@@ -317,6 +317,7 @@ bool FramelessWindowWindows::processEraseBackgroundEvent(MSG* msg, long* result)
 	auto brush = ::CreateSolidBrush(RGB(m_systemBackgroundColor.red(),
 		m_systemBackgroundColor.green(), m_systemBackgroundColor.blue()));
 	SetClassLongPtr(msg->hwnd, GCLP_HBRBACKGROUND, reinterpret_cast<LONG_PTR>(brush));
+    ::DeleteObject(brush);
 	return false;
 }
 
@@ -520,4 +521,3 @@ const QWidget* FramelessWindowWindows::window() const
 {
 	return m_window;
 }
-

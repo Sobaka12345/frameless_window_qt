@@ -3,9 +3,12 @@
 
 #include <qsystemdetection.h>
 
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN)
 #include "frameless_window_windows.hpp"
 using NativeWindow = FramelessWindowWindows;
+#elif defined(Q_OS_LINUX)
+#include "frameless_window_linux.hpp"
+using NativeWindow = FramelessWindowLinux;
 #endif
 
 #include <type_traits>
@@ -41,7 +44,7 @@ public:
 		nativeWindow()->setWindowCornersRoundness(roundness);
 	}
 
-    virtual bool nativeEvent(const QByteArray &eventType, void *message, long *result) override
+    virtual bool nativeEvent(const QByteArray &eventType, void *message, qintptr *result) override
     {
         if(nativeWindow()->filterNativeEvent(captionBar(), eventType, message, result))
         {

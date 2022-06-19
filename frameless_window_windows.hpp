@@ -1,5 +1,5 @@
-#ifndef FRAMELESSWINDOWWINDOWS_HPP
-#define FRAMELESSWINDOWWINDOWS_HPP
+#ifndef FRAMELESS_WINDOW_WINDOWS_HPP
+#define FRAMELESS_WINDOW_WINDOWS_HPP
 
 #include "iframeless_window_native.hpp"
 
@@ -22,7 +22,7 @@ public:
 	virtual void setWindowCornersRoundness(const CornersRoundness& roundness) override;
 
     virtual bool filterNativeEvent(const ICaptionBar* captionBar,
-		const QByteArray& eventType, void* message, long* result) override;
+        const QByteArray& eventType, void* message, qintptr* result) override;
 	virtual bool filterQtEvent(QObject* watched, QEvent* event) override;
 
 private:
@@ -47,4 +47,4 @@ private:
 	QColor m_systemBackgroundColor = Qt::black;
 };
 
-#endif // FRAMELESSWINDOWWINDOWS_HPP
+#endif // FRAMELESS_WINDOW_WINDOWS_HPP

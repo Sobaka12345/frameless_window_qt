@@ -15,17 +15,26 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
+if(WIN32)
+	set(PROJECT_PLATFORM_SOURCES
+		frameless_window_windows.hpp
+		frameless_window_windows.cpp)
+ELSEIF(UNIX)
+    set(PROJECT_PLATFORM_SOURCES
+		frameless_window_linux.hpp
+		frameless_window_linux.cpp)
+ENDIF()
+
 set(PROJECT_SOURCES
-        main.cpp
+	main.cpp
+	${PROJECT_PLATFORM_SOURCES}
 	icaption_bar.h
 	iframeless_window_native.hpp
-	frameless_window_windows.hpp
-	frameless_window_windows.cpp
 	frameless_window.hpp
 	caption_bar.h
 	caption_bar.cpp
-        main_window.cpp
-        main_window.h
+	main_window.cpp
+	main_window.h
 	ui/caption_bar.ui
 	ui/main_window.ui
 	resources/resources.qrc
