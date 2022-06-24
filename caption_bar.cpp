@@ -1,5 +1,5 @@
 #include "caption_bar.h"
-#include "ui_caption_bar.h"
+#include <ui_caption_bar.h>
 
 #include <QDebug>
 

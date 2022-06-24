@@ -26,12 +26,12 @@ public:
 	virtual bool filterQtEvent(QObject* watched, QEvent* event) override;
 
 private:
-	bool processNCCalcSize(MSG* msg, long* result);
-	bool processNCPaintEvent(MSG* msg, long* result);
-	bool processEraseBackgroundEvent(MSG* msg, long* result);
+	bool processNCCalcSize(MSG* msg, qintptr* result);
+	bool processNCPaintEvent(MSG* msg, qintptr* result);
+	bool processEraseBackgroundEvent(MSG* msg, qintptr* result);
 	void propagateQtMouseEvent(const ICaptionBar* captionBar, MSG* msg);
-	bool processMouseEvent(const ICaptionBar* captionBar, MSG* msg, long* result);
-	bool processHitTestEvent(const ICaptionBar* captionBar, MSG* msg, long* result);
+	bool processMouseEvent(const ICaptionBar* captionBar, MSG* msg, qintptr* result);
+	bool processHitTestEvent(const ICaptionBar* captionBar, MSG* msg, qintptr* result);
 
 	HWND hwnd() const;
 	const QWidget* window() const;

@@ -191,7 +191,7 @@ void FramelessWindowWindows::setWindowCornersRoundness(const CornersRoundness& r
 }
 
 bool FramelessWindowWindows::filterNativeEvent(const ICaptionBar* captionBar,
-    const QByteArray &eventType, void *message, qintptr *result)
+    const QByteArray& eventType, void* message, qintptr* result)
 {
     Q_UNUSED(eventType);
 
@@ -252,7 +252,7 @@ bool FramelessWindowWindows::filterQtEvent(QObject *watched, QEvent *event)
 	return false;
 }
 
-bool FramelessWindowWindows::processNCCalcSize(MSG* msg, long* result)
+bool FramelessWindowWindows::processNCCalcSize(MSG* msg, qintptr* result)
 {
 	if (msg->wParam == TRUE)
 	{
@@ -264,7 +264,7 @@ bool FramelessWindowWindows::processNCCalcSize(MSG* msg, long* result)
 	return true;
 }
 
-bool FramelessWindowWindows::processNCPaintEvent(MSG* msg, long* result)
+bool FramelessWindowWindows::processNCPaintEvent(MSG* msg, qintptr* result)
 {
 	HDC hdc = ::GetDCEx(msg->hwnd, 0, DCX_WINDOW | DCX_USESTYLE);
 
@@ -312,7 +312,7 @@ bool FramelessWindowWindows::processNCPaintEvent(MSG* msg, long* result)
 	return true;
 }
 
-bool FramelessWindowWindows::processEraseBackgroundEvent(MSG* msg, long* result)
+bool FramelessWindowWindows::processEraseBackgroundEvent(MSG* msg, qintptr* result)
 {
 	auto brush = ::CreateSolidBrush(RGB(m_systemBackgroundColor.red(),
 		m_systemBackgroundColor.green(), m_systemBackgroundColor.blue()));
@@ -337,16 +337,20 @@ void FramelessWindowWindows::propagateQtMouseEvent(const ICaptionBar *caption, M
 			msg->message == WM_NCLBUTTONDOWN || msg->message == WM_NCLBUTTONUP ?
 			Qt::LeftButton : Qt::RightButton;
 
-		QMouseEvent mouseEvent =
-			msg->message == WM_NCLBUTTONDOWN || msg->message == WM_NCRBUTTONDOWN ?
-			QMouseEvent(QEvent::MouseButtonPress, pos, button, button, keyboardModifiers()) :
-			QMouseEvent(QEvent::MouseButtonRelease, pos, button, button, keyboardModifiers());
-
-		QApplication::sendEvent(const_cast<QWidget*>(caption->qWidget()), &mouseEvent);
+		if (msg->message == WM_NCLBUTTONDOWN || msg->message == WM_NCRBUTTONDOWN)
+		{
+			QMouseEvent press(QEvent::MouseButtonPress, pos, button, button, keyboardModifiers());
+			QApplication::sendEvent(const_cast<QWidget*>(caption->qWidget()), &press);
+		}
+		else
+		{
+			QMouseEvent release(QEvent::MouseButtonRelease, pos, button, button, keyboardModifiers());
+			QApplication::sendEvent(const_cast<QWidget*>(caption->qWidget()), &release);
+		}
 	}
 }
 
-bool FramelessWindowWindows::processMouseEvent(const ICaptionBar* captionBar, MSG* msg, long* result)
+bool FramelessWindowWindows::processMouseEvent(const ICaptionBar* captionBar, MSG* msg, qintptr* result)
 {
 	if(!captionBar)
 	{
@@ -430,7 +434,7 @@ bool FramelessWindowWindows::processMouseEvent(const ICaptionBar* captionBar, MS
 	return false;
 }
 
-bool FramelessWindowWindows::processHitTestEvent(const ICaptionBar* captionBar, MSG* msg, long* result)
+bool FramelessWindowWindows::processHitTestEvent(const ICaptionBar* captionBar, MSG* msg, qintptr* result)
 {
 	*result = 0;
 
