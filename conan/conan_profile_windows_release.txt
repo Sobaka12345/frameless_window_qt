@@ -1,0 +1,7 @@
+[settings]
+    arch=x86_64
+    compiler=Visual Studio
+    compiler.runtime=MD
+    compiler.version=16
+    os=Windows
+    build_type=Release
