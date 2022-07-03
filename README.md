@@ -11,5 +11,5 @@ bash confugure_linux_default.sh release
 OR
 configure_windows_default.bat debug
 ```
-Depending on your system it will generate either a makefile or a VS solution 
+Depending on your system it will generate either a makefile or a VS solution.
 Environment information is located in conan/\*_profile_\*.txt files
