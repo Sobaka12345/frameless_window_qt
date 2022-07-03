@@ -6,17 +6,28 @@ endif()
 
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
-conan_cmake_configure(REQUIRES qt/6.0.4
+conan_cmake_configure(REQUIRES qt/6.3.1
                       GENERATORS cmake_find_package
 					  GENERATORS cmake_paths
                       IMPORTS "bin, *.dll -> ${CMAKE_BINARY_DIR}/"
                       IMPORTS "res/archdatadir/plugins, * -> ${CMAKE_BINARY_DIR}/"
                       OPTIONS qt:shared=True)
 
-conan_cmake_autodetect(settings)
+SET(PROFILE_PATH "AUTOMATIC" CACHE FILEPATH "Path to conan profile file")
 
-conan_cmake_install(PATH_OR_REFERENCE ${CMAKE_BINARY_DIR}/
-                    REMOTE conancenter
-                    SETTINGS ${settings})
+if(NOT ${PROFILE_PATH} STREQUAL AUTOMATIC)
+   message("Using profile file: ${PROFILE_PATH}")
+   conan_cmake_install(PATH_OR_REFERENCE ${CMAKE_BINARY_DIR}/
+                       REMOTE conancenter
+                       BUILD missing
+                       PROFILE ${PROFILE_PATH})
+else()
+   message("Using automatically detected profile.")
+   conan_cmake_autodetect(CONAN_SETTINGS)
+   conan_cmake_install(PATH_OR_REFERENCE ${CMAKE_BINARY_DIR}/
+                       REMOTE conancenter
+                       BUILD missing
+                       SETTINGS ${CONAN_SETTINGS})
+endif()
 
 include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
