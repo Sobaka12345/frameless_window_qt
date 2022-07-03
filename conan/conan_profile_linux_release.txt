@@ -4,6 +4,7 @@
     compiler.libcxx=libstdc++
     compiler.version=10
     os=Linux
+    build_type=Release
 
 [env]
     CC=gcc-10
