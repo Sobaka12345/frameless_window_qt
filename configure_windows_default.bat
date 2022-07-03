@@ -26,4 +26,4 @@ CALL ./venv/Scripts/activate.bat
 
 pip3 install conan
 
-cmake ../.. -DCMAKE_BUILD_TYPE=$build_conf -DPROFILE_PATH="../../conan/conan_profile_windows_"%build_conf%".txt"
+cmake ../.. -DPROFILE_PATH="../../conan/conan_profile_windows_"%build_conf%".txt"
