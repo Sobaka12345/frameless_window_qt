@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "frameless_window.hpp"
+#include "frameless_window/frameless_window.hpp"
 
 #include <QMainWindow>
 

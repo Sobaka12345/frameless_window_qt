@@ -1,5 +1,5 @@
 #include "main_window.h"
-#include "./ui_main_window.h"
+#include "ui_main_window.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : FramelessMainWindow(parent, Qt::FramelessWindowHint)

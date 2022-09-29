@@ -53,7 +53,7 @@
   <customwidget>
    <class>CaptionBar</class>
    <extends>QWidget</extends>
-   <header>caption_bar.h</header>
+   <header>caption_bar/caption_bar.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

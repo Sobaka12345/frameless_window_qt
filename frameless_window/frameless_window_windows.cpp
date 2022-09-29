@@ -1,6 +1,6 @@
 #include "frameless_window_windows.hpp"
 
-#include "icaption_bar.h"
+#include "caption_bar/icaption_bar.h"
 
 #include <QEvent>
 #include <QWidget>

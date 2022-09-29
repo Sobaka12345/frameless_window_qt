@@ -6,7 +6,7 @@ endif()
 
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
-conan_cmake_configure(REQUIRES qt/6.0.4
+conan_cmake_configure(REQUIRES qt/5.15.4
                       GENERATORS cmake_find_package
 					  GENERATORS cmake_paths
                       IMPORTS "bin, *.dll -> ${PROJECT_BINARY_OUTPUT}/"
