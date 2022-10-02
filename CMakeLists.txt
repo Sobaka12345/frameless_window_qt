@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.5.17)
 
-project(frameless_window_qt VERSION 0.1 LANGUAGES CXX)
-
-include(${CMAKE_SOURCE_DIR}/configure_conan.cmake)
+get_filename_component(PROJECT_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
+string(REPLACE " " "_" PROJECT_NAME ${PROJECT_NAME})
+project(${PROJECT_NAME} VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -13,6 +13,12 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(PROJECT_BINARY_OUTPUT ${CMAKE_BINARY_DIR}/bin)
+set(PROJECT_LIBRARY_OUTPUT ${CMAKE_BINARY_DIR}/lib)
+
+include(${CMAKE_SOURCE_DIR}/PrecompiledHeader.cmake)
+include(${CMAKE_SOURCE_DIR}/configure_conan.cmake)
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets Gui)
 
@@ -39,10 +45,22 @@ set(PROJECT_SOURCES
 	ui/caption_bar.ui
 	ui/main_window.ui
 	resources/resources.qrc
+	pchheader.h
+	pchheader.cpp
 )
 
 add_executable(frameless_window_qt
     ${PROJECT_SOURCES}
 )
 
-target_link_libraries(frameless_window_qt PRIVATE Qt6::Core Qt6::Widgets Qt6::Gui)
+add_precompiled_header(${PROJECT_NAME} pchheader.h SOURCE_CXX pchheader.cpp FORCEINCLUDE)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Core Qt6::Widgets Qt6::Gui)
+
+set_target_properties(${PROJECT_NAME}
+    PROPERTIES
+    ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_LIBRARY_OUTPUT}"
+    LIBRARY_OUTPUT_DIRECTORY "${PROJECT_LIBRARY_OUTPUT}"
+    RUNTIME_OUTPUT_DIRECTORY_DEBUG "${PROJECT_BINARY_OUTPUT}"
+    RUNTIME_OUTPUT_DIRECTORY_RELEASE "${PROJECT_BINARY_OUTPUT}"
+)

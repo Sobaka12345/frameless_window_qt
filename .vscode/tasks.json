@@ -1,0 +1,49 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Configure Linux Debug Project",
+            "command": "bash",
+            "args": ["configure_linux_default.sh", "debug"],
+            "options": {
+                "cwd": "${workspaceFolder}/"
+            },
+        },
+        {
+            "type": "shell",
+            "label": "Configure Linux Release Project",
+            "command": "bash",
+            "args": ["configure_linux_default.sh", "release"],
+            "options": {
+                "cwd": "${workspaceFolder}/"
+            },
+        },
+        {
+            "type": "shell",
+            "label": "C/C++: Build Debug Project",
+            "command": "make",
+            "options": {
+                "cwd": "${workspaceFolder}/build/debug/"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "Build Project In Debug Mode"
+        },
+        {
+            "type": "shell",
+            "label": "C/C++: Build Release Project",
+            "command": "make",
+            "options": {
+                "cwd": "${workspaceFolder}/build/release/"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "Build Project In Release Mode."
+        }
+    ],
+    "version": "2.0.0"
+}
