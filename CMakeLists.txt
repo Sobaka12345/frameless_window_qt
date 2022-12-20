@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5.17)
+cmake_minimum_required(VERSION 3.17)
 
 get_filename_component(PROJECT_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 string(REPLACE " " "_" PROJECT_NAME ${PROJECT_NAME})
@@ -14,11 +14,10 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(PROJECT_BINARY_OUTPUT ${CMAKE_BINARY_DIR}/bin)
-set(PROJECT_LIBRARY_OUTPUT ${CMAKE_BINARY_DIR}/lib)
+set(PROJECT_BINARY_OUTPUT ${CMAKE_BINARY_DIR}/bin CACHE PATH "Compiled Binaries")
+set(PROJECT_LIBRARY_OUTPUT ${CMAKE_BINARY_DIR}/lib CACHE PATH "Compiled Libraries")
 
 include(${CMAKE_SOURCE_DIR}/PrecompiledHeader.cmake)
-include(${CMAKE_SOURCE_DIR}/configure_conan.cmake)
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets Gui)
 

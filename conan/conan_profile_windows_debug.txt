@@ -1,7 +1,0 @@
-[settings]
-    arch=x86_64
-    compiler=Visual Studio
-    compiler.runtime=MDd
-    compiler.version=16
-    os=Windows
-    build_type=Debug
