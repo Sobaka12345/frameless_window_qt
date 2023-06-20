@@ -21,6 +21,6 @@ MKDIR build
 python -m venv venv
 CALL ./venv/Scripts/activate.bat
 
-pip3 install conan
+pip3 install conan==1.60
 
 conan install . -if="build/"%build_conf% -s build_type=%build_conf% --build=missing

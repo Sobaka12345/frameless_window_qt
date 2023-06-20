@@ -17,6 +17,6 @@ mkdir build &> /dev/null
 python -m venv venv
 source ./venv/bin/activate
 
-pip3 install conan
+pip3 install conan==1.60
 
 conan install . -if=build/$build_conf -s build_type=$build_conf --build=missing
