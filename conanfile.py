@@ -7,6 +7,9 @@ class FramelessWindowQt(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     requires = ["qt/6.3.1"]
     generators = ["cmake_find_package", "cmake_paths"]
+    default_options = '''
+        qt:shared=True
+    '''
 
     def imports(self):
         if self.settings.os == "Linux":
